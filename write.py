@@ -43,8 +43,8 @@ def handle_call(debugger, raw_args, result, internal_dict):
     interpreter = lldb.debugger.GetCommandInterpreter()
     interpreter.HandleCommand(args.command, res)
 
-    # Get the output
-    output = res.GetOutput()
+    # Get the output even
+    output = res.GetOutput() or res.GetError()
     print(output)
     write_to_file(args.filename, args.command, output)
 
