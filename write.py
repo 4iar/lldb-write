@@ -1,5 +1,5 @@
+import lldb
 import argparse
-import sys
 
 
 def parse_args(raw_args):
@@ -26,18 +26,27 @@ def parse_args(raw_args):
     return args
 
 
+def write_to_file(filename, command, output):
+    """Write the output to the given file, headed by the command"""
+    f = open('./' + filename, 'w')
+
+    f.write("(lldb) " + command + '\n\n')
+    f.write(output)
+
+
 def handle_call(debugger, raw_args, result, internal_dict):
     """Receives and handles the call to write from lldb"""
     args = parse_args(raw_args)
 
-    f = open('./' + args.filename, 'w')
-    debugger.SetOutputFileHandle(output, True);
+    # Run the command and store the result
+    res = lldb.SBCommandReturnObject()
+    interpreter = lldb.debugger.GetCommandInterpreter()
+    interpreter.HandleCommand(args.command, res)
 
-    debugger.HandleCommand(args.command)
-
-    debugger.SetOutputFileHandle(sys.stdout, True)
-
-    f.close()
+    # Get the output
+    output = res.GetOutput()
+    print(output)
+    write_to_file(args.filename, args.command, output)
 
 
 def __lldb_init_module(debugger, internal_dict):
