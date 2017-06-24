@@ -20,4 +20,4 @@ Or add `command script import /path/to/lldb-write/write.py` to ~/.lldbinit.
 
 Example:
 
-`(lldb) reg.txt register read`
+`(lldb) write reg.txt register read`
