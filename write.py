@@ -1,3 +1,4 @@
+from __future__ import print_function
 import lldb
 import argparse
 
@@ -45,7 +46,7 @@ def handle_call(debugger, raw_args, result, internal_dict):
 
     # Get the output even
     output = res.GetOutput() or res.GetError()
-    print(output)
+    print(output, end='')
     write_to_file(args.filename, args.command, output)
 
 
