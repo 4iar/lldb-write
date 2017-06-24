@@ -1,6 +1,8 @@
 # lldb-write
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+![Demo](https://raw.githubusercontent.com/4iar/lldb-write/demo/demo.gif)
+
 A Python script for `lldb` that writes the output of a command to a given file.
 
 ## Installation
