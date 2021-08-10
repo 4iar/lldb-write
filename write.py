@@ -29,10 +29,9 @@ def parse_args(raw_args):
 
 def write_to_file(filename, command, output):
     """Write the output to the given file, headed by the command"""
-    f = open(filename, 'w')
-
-    f.write("(lldb) " + command + '\n\n')
-    f.write(output)
+    with open(filename, 'w') as f:
+        f.write("(lldb) " + command + '\n\n')
+        f.write(output)
 
 
 def handle_call(debugger, raw_args, result, internal_dict):
