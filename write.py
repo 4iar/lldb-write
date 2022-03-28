@@ -6,6 +6,10 @@ import argparse
 def parse_args(raw_args):
     """Parse the arguments given to write"""
     args = raw_args.split(' ')
+
+    if len(args) < 2:
+        raise ValueError('write: too few arguments\nusage: write filename command [command ...]')
+
     filename = args[0]
     command = ' '.join(args[1:])
 

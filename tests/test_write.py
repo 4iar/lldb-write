@@ -61,9 +61,25 @@ class TestWrite(unittest.TestCase):
 
         self.assertEqual(actual_contents, expected_contents)
 
+    def test_shows_error_message_for_no_arguments(self):
+        stderr = subprocess.run(['lldb', self.binary_path, '--batch', '-o', 'command script import write.py', '-o',
+                       'write'],
+                       check=True,
+                       capture_output=True).stderr.decode('utf-8')
 
+        expected_error_message = "too few arguments"
+        self.assertIn(expected_error_message, stderr)
 
+    def test_shows_error_message_for_one_argument(self):
+        output_file = self.working_dir_path / 'parsing.txt'
+        stderr = subprocess.run(['lldb', self.binary_path, '--batch', '-o', 'command script import write.py', '-o',
+                       f'write {output_file}'],
+                       check=True,
+                       capture_output=True).stderr.decode('utf-8')
 
+        expected_error_message = "too few arguments"
+        self.assertIn(expected_error_message, stderr)
+        self.assertFalse(output_file.exists())  # Nothing should be written to the file if the script wasn't called correctly!
 
 
 
