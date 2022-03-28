@@ -9,4 +9,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run tests
         run: |
-          python3 -m tests/test_write.py
+          python3 -m unittest tests/test_write.py
