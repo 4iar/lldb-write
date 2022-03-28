@@ -48,6 +48,19 @@ class TestWrite(unittest.TestCase):
 
         self.assertEqual(actual_contents, expected_contents)
 
+    def test_handles_commands_with_arguments(self):
+        output_file = self.working_dir_path / 'arguments.txt'
+        subprocess.run(['lldb', self.binary_path, '--batch', '-o', 'command script import write.py', '-o',
+                        f'write {output_file} platform shell echo --this-is-an-argument'],
+                       check=True)
+
+        expected_contents = '''(lldb) platform shell echo --this-is-an-argument\n\n--this-is-an-argument\n'''
+
+        with open(output_file, 'r') as f:
+            actual_contents = f.read()
+
+        self.assertEqual(actual_contents, expected_contents)
+
 
 
 
