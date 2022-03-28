@@ -1,6 +1,7 @@
 from __future__ import print_function
 import lldb
 import argparse
+import re
 
 
 def parse_args(raw_args):
@@ -16,11 +17,17 @@ def parse_args(raw_args):
     return filename, command
 
 
+def strip_esc_seq(s):
+    """Strip ANSI escape sequences from string."""
+    esc_seq_re = re.compile(r'\x1b[^m]*m')
+    return esc_seq_re.sub('', s)
+
+
 def write_to_file(filename, command, output):
     """Write the output to the given file, headed by the command"""
     with open(filename, 'w') as f:
         f.write("(lldb) " + command + '\n\n')
-        f.write(output)
+        f.write(strip_esc_seq(output))
 
 
 def handle_call(debugger, raw_args, result, internal_dict):
