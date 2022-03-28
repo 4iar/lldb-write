@@ -1,0 +1,12 @@
+name: Run tests
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run tests
+        run: |
+          python3 -m tests/test_write.py
