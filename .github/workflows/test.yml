@@ -4,9 +4,13 @@ on: [push]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc lldb -y
       - name: Run tests
         run: |
           python3 -m unittest tests/test_write.py
