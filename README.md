@@ -1,5 +1,5 @@
 # lldb-write
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://github.com/4iar/lldb-write/actions/workflows/test.yml/badge.svg)](https://github.com/4iar/lldb-write/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ![Demo](https://raw.githubusercontent.com/4iar/lldb-write/demo/demo.gif)
 
